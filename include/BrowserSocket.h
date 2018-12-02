@@ -9,7 +9,7 @@ namespace aracne
 
 #define MEGA (1024 * 1024)
 
-class ServerSocket
+class BrowserSocket
 {
   private:
 	struct sockaddr_in server_address = {0}, client_address;
@@ -17,8 +17,8 @@ class ServerSocket
 	char buffer[1 * MEGA];
 
   public:
-	ServerSocket() = default;
-	~ServerSocket();
+	BrowserSocket() = default;
+	~BrowserSocket();
 	void Initialize(uint16_t port);
 	void AwaitConnection();
 	int ReadRequest(char *buffer, int max);

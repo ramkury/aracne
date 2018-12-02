@@ -1,4 +1,4 @@
-#include "ServerSocket.h"
+#include "BrowserSocket.h"
 #include <string>
 #include <cstring>
 #include <iostream>
@@ -7,7 +7,7 @@
 namespace aracne
 {
 
-void ServerSocket::Initialize(uint16_t port)
+void BrowserSocket::Initialize(uint16_t port)
 {
 	if ((welcome_socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 	{
@@ -31,7 +31,7 @@ void ServerSocket::Initialize(uint16_t port)
 	std::cout << "Listening on port " << port << std::endl;
 }
 
-void ServerSocket::AwaitConnection()
+void BrowserSocket::AwaitConnection()
 {
 	socklen_t length = sizeof(client_address);
 	client_socket_fd = accept(welcome_socket_fd, (sockaddr *)&client_address, &length);
@@ -48,7 +48,7 @@ void ServerSocket::AwaitConnection()
 		<< std::endl;
 }
 
-int ServerSocket::ReadRequest(char * buffer, int max)
+int BrowserSocket::ReadRequest(char * buffer, int max)
 {
 	int n = read(client_socket_fd, buffer, max);
 	if (n < 0)
@@ -60,7 +60,7 @@ int ServerSocket::ReadRequest(char * buffer, int max)
 	//TODO ensure request is read until the end
 }
 
-ServerSocket::~ServerSocket()
+BrowserSocket::~BrowserSocket()
 {
 	if (welcome_socket_fd) close(welcome_socket_fd);
 	if (client_socket_fd) close(client_socket_fd);

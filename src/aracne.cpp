@@ -1,4 +1,4 @@
-#include "ServerSocket.h"
+#include "BrowserSocket.h"
 #include "HttpRequest.h"
 #include <iostream>
 
@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
 	char buffer[1024 * 1024];
 	std::cout << "Starting" << std::endl;
 	int port = argc > 1 ? atoi(argv[argc - 1]) : 8228;
-	ServerSocket ss;
+	BrowserSocket ss;
 	ss.Initialize(port);
 	ss.AwaitConnection();
 	int n = ss.ReadRequest(buffer, sizeof(buffer));
