@@ -1,4 +1,5 @@
 #include "ServerSocket.h"
+#include "HttpRequest.h"
 #include <iostream>
 
 using namespace aracne;
@@ -14,6 +15,9 @@ int main(int argc, char const *argv[])
 	int n = ss.ReadRequest(buffer, sizeof(buffer));
 	buffer[n] = '\0';
 	std::cout << "Request:" << std::endl << buffer << std::endl;
+
+	HttpRequest request(buffer);
+	
 	std::cin.get();
 	return 0;
 }

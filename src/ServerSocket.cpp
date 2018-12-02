@@ -57,6 +57,13 @@ int ServerSocket::ReadRequest(char * buffer, int max)
 		exit(-4);
 	}
 	return n;
+	//TODO ensure request is read until the end
+}
+
+ServerSocket::~ServerSocket()
+{
+	if (welcome_socket_fd) close(welcome_socket_fd);
+	if (client_socket_fd) close(client_socket_fd);
 }
 
 } // namespace aracne
