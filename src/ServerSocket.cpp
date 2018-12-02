@@ -16,7 +16,7 @@ void ServerSocket::Initialize(uint16_t port)
 	}
 
 	server_address.sin_family = AF_INET;
-	server_address.sin_addr.s_addr = INADDR_ANY;
+	inet_aton("127.0.0.1", (in_addr*) &server_address.sin_addr.s_addr);
 	server_address.sin_port = htons(port);
 
 	int bindres = bind(welcome_socket_fd, (struct sockaddr *)&server_address, sizeof(server_address));
