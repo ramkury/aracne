@@ -1,4 +1,5 @@
 #include "BrowserSocket.h"
+#include "utils.h"
 #include <string>
 #include <cstring>
 #include <iostream>
@@ -58,6 +59,14 @@ int BrowserSocket::ReadRequest(char * buffer, int max)
 	}
 	return n;
 	//TODO ensure request is read until the end
+}
+
+void BrowserSocket::SendResponse(char * buffer, int length)
+{
+	if (write(client_socket_fd, buffer, length) < 0)
+	{
+		error("Could not write response to Browser Socket");
+	}
 }
 
 BrowserSocket::~BrowserSocket()

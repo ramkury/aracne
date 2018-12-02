@@ -13,18 +13,18 @@ namespace aracne
 
 class BrowserSocket
 {
-  private:
+private:
 	struct sockaddr_in server_address = {0}, client_address;
 	int welcome_socket_fd = 0, client_socket_fd = 0;
 	char buffer[1 * MEGA];
 
-  public:
+public:
 	BrowserSocket() = default;
 	~BrowserSocket();
 	void Initialize(uint16_t port);
 	void AwaitConnection();
 	int ReadRequest(char *buffer, int max);
-	void SendResponse();
+	void SendResponse(char * buffer, int length);
 };
 
 } // namespace aracne

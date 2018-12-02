@@ -16,6 +16,13 @@ namespace aracne
 		}
 	}
 
+	void InternetSocket::UpdateRequest(HttpRequest &request)
+	{
+		request.header["Accept-Encoding:"] = "identity";
+		request.header["Connection:"] = "close";
+	}
+
+
 	int InternetSocket::SendRequest(HttpRequest &request, char *response, int max)
 	{
 		std::string& hostname = request.header.at("Host:");
@@ -35,19 +42,25 @@ namespace aracne
 		}
 
 		// Connection estabilished, sending HTTP request
+		UpdateRequest(request);
 		std::string request_str = request.ToString();
 		if (write(socket_fd, request_str.c_str(), request_str.length()) < 0)
 		{
-			error("Could not write data to socket");
+			error("Could not write data to Internet Socket");
 		}
 
-		int n = read(socket_fd, response, max);
+		int n = 0, total = 0;
+		while ((n = read(socket_fd, response + total, max - total)) > 0)
+		{
+			total += n;
+		}
+
 		if (n < 0)
 		{
 			error("Could not read response");
 		}
-		
-		return n;
+
+		return total;
 	}
 
 }

@@ -1,4 +1,5 @@
 #include "BrowserSocket.h"
+#include "InternetSocket.h"
 #include "HttpRequest.h"
 #include <iostream>
 
@@ -19,6 +20,14 @@ int main(int argc, char const *argv[])
 	HttpRequest request(buffer);
 
 	std::cout << "Rebuilt request: " << std::endl << request.ToString() << std::endl;
+
+	InternetSocket is;
+	int response_size = is.SendRequest(request, buffer, 1024 * 1024);
+
+	buffer[response_size] = '\0';
+	std::cout << "Response: " << std::endl << buffer << std::endl;
+
+	ss.SendResponse(buffer, response_size);
 
 	std::cin.get();
 	return 0;
