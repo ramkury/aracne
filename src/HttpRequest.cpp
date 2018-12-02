@@ -27,4 +27,17 @@ void HttpRequest::Parse(char *request)
 	}
 }
 
+std::string HttpRequest::ToString()
+{
+	std::ostringstream res;
+	res << method << " " << url << " " << version << "\r\n";
+	for (auto& field : header)
+	{
+		res << field.first << " " << field.second << "\r\n";
+	}
+	res << "\r\n";
+
+	return res.str();
+}
+
 } // namespace aracne

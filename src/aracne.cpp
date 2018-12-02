@@ -17,7 +17,9 @@ int main(int argc, char const *argv[])
 	std::cout << "Request:" << std::endl << buffer << std::endl;
 
 	HttpRequest request(buffer);
-	
+
+	std::cout << "Rebuilt request: " << std::endl << request.ToString() << std::endl;
+
 	std::cin.get();
 	return 0;
 }
