@@ -1,8 +1,13 @@
 #include <cstdio>
 #include <cstdlib>
 
-void error(const char* message)
+namespace aracne
+{
+
+void error(const char *message)
 {
 	perror(message);
 	exit(-1);
 }
+
+} // namespace aracne
