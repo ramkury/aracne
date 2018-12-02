@@ -45,3 +45,7 @@ CMakeLists.txt.user*
 # Executable files
 *.out
 *.exe
+
+# Visual Studio [code] files
+.vs
+.vscode
