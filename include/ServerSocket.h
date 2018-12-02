@@ -20,6 +20,7 @@ class ServerSocket
 	ServerSocket() = default;
 	void Initialize(uint16_t port);
 	void AwaitConnection();
+	int ReadRequest(char * buffer, int max);
 };
 
 } // namespace aracne

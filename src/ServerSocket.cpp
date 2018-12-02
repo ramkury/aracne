@@ -2,6 +2,7 @@
 #include <string>
 #include <cstring>
 #include <iostream>
+#include <unistd.h>
 
 namespace aracne
 {
@@ -37,13 +38,25 @@ void ServerSocket::AwaitConnection()
 
 	if (client_socket_fd < 0)
 	{
-		throw std::string("Error accepting connection");
+		std::cout << "Error accepting connection" << std::endl;
+		exit(-3);
 	}
 
 	std::cout
 		<< "Accepted connection from " << inet_ntoa(client_address.sin_addr)
 		<< " on port " << ntohs(client_address.sin_port)
 		<< std::endl;
+}
+
+int ServerSocket::ReadRequest(char * buffer, int max)
+{
+	int n = read(client_socket_fd, buffer, max);
+	if (n < 0)
+	{
+		std::cout << "Error reading from socket" << std::endl;
+		exit(-4);
+	}
+	return n;
 }
 
 } // namespace aracne
