@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cstdint>
 #include <sys/socket.h>
 #include <sys/types.h>
