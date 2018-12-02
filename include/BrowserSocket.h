@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cstdint>
 #include <sys/socket.h>
 #include <sys/types.h>
@@ -22,6 +24,7 @@ class BrowserSocket
 	void Initialize(uint16_t port);
 	void AwaitConnection();
 	int ReadRequest(char *buffer, int max);
+	void SendResponse();
 };
 
 } // namespace aracne
