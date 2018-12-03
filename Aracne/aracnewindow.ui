@@ -472,7 +472,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="RequestTab">
      <attribute name="title">
@@ -490,7 +490,7 @@
       <property name="title">
        <string>Request</string>
       </property>
-      <widget class="QPlainTextEdit" name="plainTextEdit_7">
+      <widget class="QPlainTextEdit" name="textRequest">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -503,7 +503,7 @@
         <string/>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_5">
+      <widget class="QPushButton" name="btnSendRequest">
        <property name="geometry">
         <rect>
          <x>140</x>
@@ -529,7 +529,7 @@
       <property name="title">
        <string>Response</string>
       </property>
-      <widget class="QPlainTextEdit" name="plainTextEdit_9">
+      <widget class="QPlainTextEdit" name="textResponse">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -539,7 +539,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_7">
+      <widget class="QPushButton" name="btnSendResponse">
        <property name="geometry">
         <rect>
          <x>140</x>
@@ -730,22 +730,6 @@
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionSpider">
-   <property name="checkable">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Spider</string>
-   </property>
-   <property name="shortcutVisibleInContextMenu">
-    <bool>false</bool>
-   </property>
-  </action>
-  <action name="actionDump">
-   <property name="text">
-    <string>Dump</string>
-   </property>
-  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
