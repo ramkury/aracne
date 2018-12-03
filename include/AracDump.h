@@ -1,15 +1,28 @@
 #pragma once
 
-namespace aracne{
+#include <string>
+#include <vector>
+#include <utility>
+#include <map>
+#include <set>
+#include <iostream>
+#include <stdlib.h>
+#include "utils.h"
 
+using namespace std;
+
+namespace aracne{
 
 class AracDump{
 private:
-    /* data */
+    string url, host, dldPath;
+    void verifyLinks(VecSfont & links);
+    void updateHTML(string html, VecSfont links);
 public:
-    AracDump();
+
+    int startDump();
+    AracDump(string, string);
     ~AracDump();
 };
-
 
 }

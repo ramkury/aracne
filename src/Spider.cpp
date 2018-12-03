@@ -1,6 +1,5 @@
 #include "Spider.h"
-#include "HttpRequest.h"
-#include "InternetSocket.h"
+#include "HttpUtils.h"
 #ifdef MY_DEBUG_SPIDER
 #include "ColorMacro.h"
 #endif
@@ -23,9 +22,7 @@ void SpiderLst::show() {
   }
 }
 
-Spider::Spider(
-    string urlReq,
-    string domain) {  // domain can have "http://" but can NOT end with '/'
+Spider::Spider(string urlReq, string domain) {  // domain can have "http://" but can NOT end with '/'
   // #ifdef MY_DEBUG_SPIDER
   //     cout<< BoldTextBlue << "\n ---- Contrutor Spider ---- "<< TextDefault
   //     << endl;
@@ -89,7 +86,7 @@ vector<string> Spider::lstURLsfrom(string url) {
   vector<string> urlLst;
   string temp;
 
-  string body = responseReqURL(url);
+  string body = bodyResponseReqURL(host, url);
   // #ifdef MY_DEBUG_SPIDER
   //     cout<< "BODY:\n"<< body << endl;
   // #endif
@@ -145,58 +142,4 @@ void Spider::lstAll(string url) {
 
 void Spider::lstAll() { lstAll(url); }
 
-string Spider::responseReqURL(string url) {
-  // #ifdef MY_DEBUG_SPIDER
-  //     cout<< BoldTextBlue << "\n ---- Dentro da responseReqURL ---- "<<
-  //     TextDefault << endl;
-  // #endif
-  InternetSocket socket;
-
-  if (url.find(host) == std::string::npos) {
-    if (url[0] == '/')
-      url = host + url;
-    else
-      url = host + "/" + url;
-  }
-
-  if (url.find("http://") == std::string::npos) {
-    url = "http://" + url;
-  }
-
-  // #ifdef MY_DEBUG_SPIDER
-  //     cout << "URL\t" << url << endl;
-  // #endif
-
-  HttpRequest req = HttpRequest(host, url);
-
-  char buffer[(1024 * 1024)];
-
-  int len = socket.SendRequest(req, buffer, (1024 * 1024));
-
-  buffer[len] = '\0';
-
-// #ifdef MY_DEBUG_SPIDER
-//   cout << "\nHTTP Request to string:\n" << req.ToString() << endl;
-// #endif
-
-  string body = string(buffer);
-  // #ifdef MY_DEBUG_SPIDER
-  //     cout<<"Response:\n"<< body << endl;
-  // #endif
-  body = body.substr(body.find("\r\n\r\n") + 4);
-
-  for (auto &b : body) {
-    b = tolower(b);
-  }
-
-  // #ifdef MY_DEBUG_SPIDER
-  //     cout<<"\nBODY:\n"<< body << endl;
-  // #endif
-
-  // #ifdef MY_DEBUG_SPIDER
-  //     cout<< BoldTextBlue << " ---- Dentro da responseReqURL ---- \n"<<
-  //     TextDefault << endl;
-  // #endif
-  return body;
-}
 }  // namespace aracne
