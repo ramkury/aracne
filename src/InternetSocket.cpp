@@ -60,6 +60,11 @@ namespace aracne
 			error("Could not read response");
 		}
 
+		if (total >= max)
+		{
+			error("InternetSocket: buffer overflow");
+		}
+
 		return total;
 	}
 

@@ -6,7 +6,7 @@ namespace aracne
 
 void error(const char *message)
 {
-	perror(message);
+	fprintf(stderr, "%s\n", message);
 	exit(-1);
 }
 

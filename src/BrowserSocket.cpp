@@ -57,8 +57,12 @@ int BrowserSocket::ReadRequest(char * buffer, int max)
 		std::cout << "Error reading from socket" << std::endl;
 		exit(-4);
 	}
+
+	if (n >= max)
+	{
+		error("BrowserSocket: buffer overflow");
+	}
 	return n;
-	//TODO ensure request is read until the end
 }
 
 void BrowserSocket::SendResponse(char * buffer, int length)
