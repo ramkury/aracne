@@ -8,10 +8,13 @@
 
 using namespace std;
 
+namespace aracne{
 
 struct SpiderLst{
     string url;
     vector<SpiderLst> lst = vector<SpiderLst> ();
+    void show();
+    void show(string);
 };
 
 class Spider{
@@ -23,7 +26,11 @@ private:
     vector<string> lstURLsfrom(string);
     string responseReqURL(string);
     void lstAll(string url);
+    struct SpiderLst showSpider(string, vector<string>);
 public:
     Spider(string, string);
-    struct SpiderLst showSpider(string, vector<string>);
+    struct SpiderLst showSpider();
+    void lstAll();
 };
+
+}

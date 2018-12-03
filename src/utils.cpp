@@ -1,13 +1,11 @@
 #include <cstdio>
 #include <cstdlib>
 
-namespace aracne
-{
+namespace aracne {
 
-void error(const char *message)
-{
-	fprintf(stderr, "%s\n", message);
-	exit(-1);
+void error(const char *message) {
+  fprintf(stderr, "%s\n", message);
+  exit(-1);
 }
 
-} // namespace aracne
+}  // namespace aracne
