@@ -25,14 +25,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        aracnewindow.cpp
+    aracnewindow.cpp \
+    main.cpp \
+    ../src/BrowserSocket.cpp \
+    ../src/HttpRequest.cpp \
+    ../src/InternetSocket.cpp \
+    ../src/Spider.cpp \
+    ../src/utils.cpp
 
 HEADERS += \
-        aracnewindow.h
+    aracnewindow.h \
+    ../include/BrowserSocket.h \
+    ../include/HttpRequest.h \
+    ../include/InternetSocket.h \
+    ../include/Spider.h \
+    ../include/utils.h
 
 FORMS += \
         aracnewindow.ui
+
+INCLUDEPATH += "../include"
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
