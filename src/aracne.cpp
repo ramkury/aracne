@@ -21,13 +21,12 @@ int main(int argc, char const *argv[])
 		int n = ss.ReadRequest(buffer, BUF_SIZE);
 		if (n < 5)
 		{
+			std::cout << "Request too small (" << n << " bytes)" << std::endl;
 			continue;
 		}
 		buffer[n] = '\0';
 		std::cout << "Request:" << std::endl
 				  << buffer << std::endl;
-
-		std::cout.flush();
 
 		HttpRequest request(buffer);
 
