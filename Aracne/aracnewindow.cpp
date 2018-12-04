@@ -11,8 +11,8 @@ AracneWindow::AracneWindow(uint16_t browserPort, QWidget *parent) :
     browserSocket.Initialize(browserPort);
     buffer = new char[BUFFER_SIZE];
     memset(buffer, 0, BUFFER_SIZE);
-    //QtConcurrent::run(this, &AracneWindow::StartProxy);
-    StartProxy();
+    ui->btnSendRequest->setEnabled(false);
+    ui->btnSendResponse->setEnabled(false);
 }
 
 void AracneWindow::StartProxy()
@@ -84,4 +84,10 @@ void AracneWindow::plainTextToBuffer(QPlainTextEdit* textEdit)
     qs_request = qs_request.replace("\n", "\r\n").replace("\r\r\n", "\r\n");
     QByteArray byte_arr = qs_request.toLocal8Bit();
     strcpy(buffer, byte_arr.data());
+}
+
+void AracneWindow::on_btnStartProxy_clicked()
+{
+    ui->btnStartProxy->setEnabled(false);
+    StartProxy();
 }

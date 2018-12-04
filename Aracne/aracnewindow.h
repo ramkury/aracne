@@ -26,6 +26,8 @@ private slots:
 
     void on_btnSendResponse_clicked();
 
+    void on_btnStartProxy_clicked();
+
 private:
     Ui::AracneWindow *ui;
     aracne::BrowserSocket browserSocket;
