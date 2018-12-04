@@ -596,7 +596,7 @@
       <property name="title">
        <string>Spider</string>
       </property>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="btnSpiderStart">
        <property name="geometry">
         <rect>
          <x>990</x>
@@ -606,10 +606,10 @@
         </rect>
        </property>
        <property name="text">
-        <string>Done</string>
+        <string>Start</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_4">
+      <widget class="QLineEdit" name="textSpiderHost">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -648,7 +648,7 @@
         <string>URL</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_5">
+      <widget class="QLineEdit" name="textSpiderUrl">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -661,7 +661,7 @@
         <string/>
        </property>
       </widget>
-      <widget class="QTreeView" name="treeView">
+      <widget class="QPlainTextEdit" name="textSpiderContent">
        <property name="geometry">
         <rect>
          <x>10</x>

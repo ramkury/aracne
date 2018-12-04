@@ -1,6 +1,7 @@
 #include "aracnewindow.h"
 #include "ui_aracnewindow.h"
 #include "HttpRequest.h"
+#include "Spider.h"
 #include <QtConcurrent/QtConcurrent>
 
 AracneWindow::AracneWindow(uint16_t browserPort, QWidget *parent) :
@@ -90,4 +91,17 @@ void AracneWindow::on_btnStartProxy_clicked()
 {
     ui->btnStartProxy->setEnabled(false);
     StartProxy();
+}
+
+void AracneWindow::on_btnSpiderStart_clicked()
+{
+    ui->btnSpiderStart->setEnabled(false);
+    ui->textSpiderContent->setPlainText("Running spider...");
+
+    aracne::Spider sp(ui->textSpiderUrl->text().toStdString(), ui->textSpiderHost->text().toStdString());
+
+    // TODO
+    // Update textSpiderContent
+    // ui->textSpiderContent->setPlainText(spiderResult);
+    ui->btnSpiderStart->setEnabled(true);
 }

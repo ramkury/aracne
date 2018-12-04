@@ -28,6 +28,8 @@ private slots:
 
     void on_btnStartProxy_clicked();
 
+    void on_btnSpiderStart_clicked();
+
 private:
     Ui::AracneWindow *ui;
     aracne::BrowserSocket browserSocket;
