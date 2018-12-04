@@ -513,7 +513,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Done changes</string>
+        <string>Send request</string>
        </property>
       </widget>
      </widget>
@@ -549,7 +549,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Done changes</string>
+        <string>Send response</string>
        </property>
       </widget>
      </widget>
