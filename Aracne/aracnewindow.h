@@ -18,16 +18,23 @@ class AracneWindow : public QMainWindow
 
 public:
     explicit AracneWindow(uint16_t browserPort, QWidget *parent = nullptr);
-    void StartProxy();
     ~AracneWindow();
 
 private slots:
     void on_btnSendRequest_clicked();
 
+    void on_btnSendResponse_clicked();
+
 private:
     Ui::AracneWindow *ui;
     aracne::BrowserSocket browserSocket;
     aracne::InternetSocket internetSocket;
+    aracne::HttpRequest request;
+    int response_size = 0;
+    void StartProxy();
+    void getRequest();
+    void sendRequest();
+    void sendResponse();
     char* buffer;
 };
 

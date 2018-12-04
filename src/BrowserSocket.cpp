@@ -53,6 +53,7 @@ int BrowserSocket::ReadRequest(char *buffer, int max) {
   if (n >= max) {
     error("BrowserSocket: buffer overflow");
   }
+  buffer[n] = '\0';
   return n;
 }
 

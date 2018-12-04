@@ -31,7 +31,9 @@ SOURCES += \
     ../src/HttpRequest.cpp \
     ../src/InternetSocket.cpp \
     ../src/Spider.cpp \
-    ../src/utils.cpp
+    ../src/utils.cpp \
+    ../src/AracDump.cpp \
+    ../src/HttpUtils.cpp \
 
 HEADERS += \
     aracnewindow.h \
@@ -39,7 +41,10 @@ HEADERS += \
     ../include/HttpRequest.h \
     ../include/InternetSocket.h \
     ../include/Spider.h \
-    ../include/utils.h
+    ../include/utils.h \
+    ../include/AracDump.h \
+    ../include/ColorMacro.h \
+    ../include/HttpUtils.h \
 
 FORMS += \
         aracnewindow.ui

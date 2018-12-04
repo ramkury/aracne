@@ -1,6 +1,7 @@
 #include "aracnewindow.h"
 #include "ui_aracnewindow.h"
 #include "HttpRequest.h"
+#include <QtConcurrent/QtConcurrent>
 
 AracneWindow::AracneWindow(uint16_t browserPort, QWidget *parent) :
     QMainWindow(parent),
@@ -9,18 +10,15 @@ AracneWindow::AracneWindow(uint16_t browserPort, QWidget *parent) :
     ui->setupUi(this);
     browserSocket.Initialize(browserPort);
     buffer = new char[BUFFER_SIZE];
+    memset(buffer, 0, BUFFER_SIZE);
+    //QtConcurrent::run(this, &AracneWindow::StartProxy);
+    StartProxy();
 }
 
 void AracneWindow::StartProxy()
 {
     browserSocket.AwaitConnection();
-    int n;
-    while ((n = browserSocket.ReadRequest(buffer, BUFFER_SIZE)) < 5)
-    {
-
-    }
-    buffer[n] = '\0';
-    ui->textRequest->setPlainText(buffer);
+    getRequest();
 }
 
 AracneWindow::~AracneWindow()
@@ -31,17 +29,47 @@ AracneWindow::~AracneWindow()
 
 void AracneWindow::on_btnSendRequest_clicked()
 {
-    QString req_qstr = ui->textRequest->toPlainText();
-    QByteArray req_data = req_qstr.toLocal8Bit();
-    char * szRequest = new char[req_data.length() + 1];
-    strcpy(szRequest, req_data.data());
-    aracne::HttpRequest request(szRequest);
-    delete[] szRequest;
+    request.Parse(buffer);
+    //QtConcurrent::run(this, &AracneWindow::sendRequest);
+    sendRequest();
+}
 
-    int n = internetSocket.SendRequest(request, buffer, BUFFER_SIZE);
-    buffer[n] = '\0';
+void AracneWindow::on_btnSendResponse_clicked()
+{
+    //QtConcurrent::run(this, &AracneWindow::sendResponse);
+    sendResponse();
+}
+
+void AracneWindow::getRequest()
+{
+    ui->btnSendRequest->setEnabled(false);
+    ui->btnSendResponse->setEnabled(false);
+    ui->textRequest->clear();
+
+    if (browserSocket.ReadRequest(buffer, BUFFER_SIZE) == 0)
+    {
+        // Browser has disconnected from socket. Wait for new connection.
+        browserSocket.AwaitConnection();
+        browserSocket.ReadRequest(buffer, BUFFER_SIZE);
+    }
+
+    ui->textRequest->setPlainText(buffer);
+    ui->textResponse->clear();
+    ui->btnSendRequest->setEnabled(true);
+}
+
+void AracneWindow::sendRequest()
+{
+    ui->btnSendRequest->setEnabled(false);
+    response_size = internetSocket.SendRequest(request, buffer, BUFFER_SIZE);
     ui->textResponse->setPlainText(buffer);
+    ui->btnSendResponse->setEnabled(true);
+}
 
-    //TODO move this action to when SendResponse is clicked
-    browserSocket.SendResponse(buffer, n);
+void AracneWindow::sendResponse()
+{
+    ui->btnSendRequest->setEnabled(false);
+    ui->btnSendResponse->setEnabled(false);
+    browserSocket.SendResponse(buffer, response_size);
+    getRequest();
 }

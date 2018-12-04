@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <cstring>
 #include "utils.h"
+#include <errno.h>
 
 namespace aracne {
 InternetSocket::InternetSocket() {
@@ -29,8 +30,16 @@ int InternetSocket::SendRequest(HttpRequest &request, char *response, int max) {
   addr.sin_port = htons(80);
   // Address comes from DNS lookup
   memcpy(&addr.sin_addr.s_addr, host->h_addr_list[0], host->h_length);
-  if (connect(socket_fd, (sockaddr *)&addr, sizeof(addr)) < 0) {
-    error("Could not connect to server");
+  while (connect(socket_fd, (sockaddr *)&addr, sizeof(addr)) < 0) {
+      fprintf(stderr, "Errno: %d\t", errno);
+      if(errno == 106) {
+          socket_fd = socket(AF_INET, SOCK_STREAM, 0);
+          if (socket_fd < 0) {
+            error("Could not create Internet Socket");
+          }
+      } else {
+          error("Could not connect to server");
+      }
   }
 
   // Connection estabilished, sending HTTP request
@@ -52,6 +61,10 @@ int InternetSocket::SendRequest(HttpRequest &request, char *response, int max) {
   if (total >= max) {
     error("InternetSocket: buffer overflow");
   }
+
+  close(socket_fd);
+
+  response[total] = '\0';
 
   return total;
 }
