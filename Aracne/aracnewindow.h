@@ -2,6 +2,7 @@
 #define ARACNEWINDOW_H
 
 #include <QMainWindow>
+#include <QPlainTextEdit>
 #include <cstdint>
 #include "BrowserSocket.h"
 #include "InternetSocket.h"
@@ -31,6 +32,7 @@ private:
     aracne::InternetSocket internetSocket;
     aracne::HttpRequest request;
     int response_size = 0;
+    void plainTextToBuffer(QPlainTextEdit* textEdit);
     void StartProxy();
     void getRequest();
     void sendRequest();

@@ -29,13 +29,17 @@ AracneWindow::~AracneWindow()
 
 void AracneWindow::on_btnSendRequest_clicked()
 {
+    plainTextToBuffer(ui->textRequest);
     request.Parse(buffer);
+
     //QtConcurrent::run(this, &AracneWindow::sendRequest);
     sendRequest();
 }
 
 void AracneWindow::on_btnSendResponse_clicked()
 {
+    plainTextToBuffer(ui->textResponse);
+
     //QtConcurrent::run(this, &AracneWindow::sendResponse);
     sendResponse();
 }
@@ -72,4 +76,12 @@ void AracneWindow::sendResponse()
     ui->btnSendResponse->setEnabled(false);
     browserSocket.SendResponse(buffer, response_size);
     getRequest();
+}
+
+void AracneWindow::plainTextToBuffer(QPlainTextEdit* textEdit)
+{
+    QString qs_request = textEdit->toPlainText();
+    qs_request = qs_request.replace("\n", "\r\n").replace("\r\r\n", "\r\n");
+    QByteArray byte_arr = qs_request.toLocal8Bit();
+    strcpy(buffer, byte_arr.data());
 }
