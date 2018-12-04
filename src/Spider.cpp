@@ -1,26 +1,39 @@
 #include "Spider.h"
 #include "HttpUtils.h"
+#include <string.h>
 #ifdef MY_DEBUG_SPIDER
 #include "ColorMacro.h"
 #endif
 
 namespace aracne {
 
-void SpiderLst::show(string level_indent) {
-  cout << level_indent << url << endl;
+string SpiderLst::show(string level_indent) {
+  string out = level_indent + url + "\n";
   level_indent = "     " + level_indent;
   for (auto &s : lst) {
-    s.show(level_indent);
+    out += s.show(level_indent);
   }
+
+  return out;
 }
 
-void SpiderLst::show() {
-  cout << url << endl;
+string SpiderLst::show() {
+  string out = url + "\n";
   string level_indent = "   +-- ";
   for (auto &s : lst) {
-    s.show(level_indent);
+    out += s.show(level_indent);
   }
+
+  return out;
 }
+
+char * SpiderLst::showC(){
+  string ret = show();
+  char * S = new char[ret.length() + 1];
+  strcpy(S,ret.c_str());
+  return S;
+}
+
 
 Spider::Spider(string urlReq, string domain) {  // domain can have "http://" but can NOT end with '/'
   // #ifdef MY_DEBUG_SPIDER

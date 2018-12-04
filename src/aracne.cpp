@@ -51,7 +51,8 @@ int main(int argc, char const *argv[]) {
   cout << "Maping Spider\n" << endl;
   sp.lstAll();
   struct SpiderLst spLst = sp.showSpider();
-  spLst.show();
+  char* out = spLst.showC();
+  cout << out;
 
 #endif
 

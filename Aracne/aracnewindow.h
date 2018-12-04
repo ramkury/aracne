@@ -42,6 +42,7 @@ private:
     void sendRequest();
     void sendResponse();
     char* buffer;
+    char* spiderResult;
 };
 
 #endif // ARACNEWINDOW_H

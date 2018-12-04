@@ -13,8 +13,9 @@ namespace aracne{
 struct SpiderLst{
     string url;
     vector<SpiderLst> lst = vector<SpiderLst> ();
-    void show();
-    void show(string);
+    string show();
+    string show(string);
+    char * showC();
 };
 
 class Spider{

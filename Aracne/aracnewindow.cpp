@@ -99,9 +99,12 @@ void AracneWindow::on_btnSpiderStart_clicked()
     ui->textSpiderContent->setPlainText("Running spider...");
 
     aracne::Spider sp(ui->textSpiderUrl->text().toStdString(), ui->textSpiderHost->text().toStdString());
+    sp.lstAll();
+    aracne::SpiderLst spLst = sp.showSpider();
+    spiderResult = spLst.showC();
 
     // TODO
     // Update textSpiderContent
-    // ui->textSpiderContent->setPlainText(spiderResult);
+    ui->textSpiderContent->setPlainText(spiderResult);
     ui->btnSpiderStart->setEnabled(true);
 }
