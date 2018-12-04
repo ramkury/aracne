@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Aracne
+TARGET = aracne
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -27,29 +27,29 @@ CONFIG += c++11
 SOURCES += \
     aracnewindow.cpp \
     main.cpp \
-    ../src/BrowserSocket.cpp \
-    ../src/HttpRequest.cpp \
-    ../src/InternetSocket.cpp \
-    ../src/Spider.cpp \
-    ../src/utils.cpp \
-    ../src/AracDump.cpp \
-    ../src/HttpUtils.cpp \
+    src/BrowserSocket.cpp \
+    src/HttpRequest.cpp \
+    src/InternetSocket.cpp \
+    src/Spider.cpp \
+    src/utils.cpp \
+    src/AracDump.cpp \
+    src/HttpUtils.cpp \
 
 HEADERS += \
     aracnewindow.h \
-    ../include/BrowserSocket.h \
-    ../include/HttpRequest.h \
-    ../include/InternetSocket.h \
-    ../include/Spider.h \
-    ../include/utils.h \
-    ../include/AracDump.h \
-    ../include/ColorMacro.h \
-    ../include/HttpUtils.h \
+    include/BrowserSocket.h \
+    include/HttpRequest.h \
+    include/InternetSocket.h \
+    include/Spider.h \
+    include/utils.h \
+    include/AracDump.h \
+    include/ColorMacro.h \
+    include/HttpUtils.h \
 
 FORMS += \
         aracnewindow.ui
 
-INCLUDEPATH += "../include"
+INCLUDEPATH += "include"
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

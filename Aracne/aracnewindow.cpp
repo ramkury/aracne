@@ -98,6 +98,20 @@ void AracneWindow::on_btnSpiderStart_clicked()
     ui->btnSpiderStart->setEnabled(false);
     ui->textSpiderContent->setPlainText("Running spider...");
 
+    //QtConcurrent::run(this, &AracneWindow::runSpider);
+    runSpider();
+
+//    aracne::Spider sp(ui->textSpiderUrl->text().toStdString(), ui->textSpiderHost->text().toStdString());
+//    sp.lstAll();
+//    aracne::SpiderLst spLst = sp.showSpider();
+//    spiderResult = spLst.showC();
+
+//    ui->textSpiderContent->setPlainText(spiderResult);
+//    ui->btnSpiderStart->setEnabled(true);
+}
+
+void AracneWindow::runSpider()
+{
     aracne::Spider sp(ui->textSpiderUrl->text().toStdString(), ui->textSpiderHost->text().toStdString());
     sp.lstAll();
     aracne::SpiderLst spLst = sp.showSpider();

@@ -41,6 +41,7 @@ private:
     void getRequest();
     void sendRequest();
     void sendResponse();
+    void runSpider();
     char* buffer;
     char* spiderResult;
 };
